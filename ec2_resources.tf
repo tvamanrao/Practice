@@ -1,8 +1,15 @@
+resource "aws_key_pair" "oel7u9" {
+    key_name = var.sshkey_pair.ssh_key_name
+    public_key = var.sshkey_pair.ssh_pub_key
+    tags = {
+      "Name" = var.sshkey_pair.ssh_key_name
+    }
+}
 resource "aws_instance" "deploy_web_ec2" {
     count = length(var.ec2_name.name)
     ami             = var.ami_id
     instance_type   = "t2.micro"
-    key_name        = data.aws_key_pair.oel7u9.key_name
+    key_name        = aws_key_pair.oel7u9.key_name
     subnet_id       = aws_subnet.subnets[0].id
     vpc_security_group_ids = [aws_security_group.sg.id]
     availability_zone = var.ava_zone

@@ -1,7 +1,7 @@
-data "aws_key_pair" "oel7u9" {
-    key_name = "oel7u9"
+/*data "aws_key_pair" "oel7u9" {
+    key_name = "oel7u9_tf"
     include_public_key = true
-}
+}*/
 output "vpc_cidr" {
     value = aws_vpc.my_vpc.cidr_block
 }

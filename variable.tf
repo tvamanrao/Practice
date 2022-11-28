@@ -16,6 +16,12 @@ variable "pub_cidr" {
 variable "secgrp" {
     type = string
 }
+variable "sshkey_pair" {
+  type = object ({
+        ssh_key_name = string
+        ssh_pub_key  = string
+  })
+}
 variable "ec2_name" {
   type = object ({
         name = list(string)
