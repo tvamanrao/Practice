@@ -1,13 +1,13 @@
 variable "vmnrds-rgn" {
-    type    = string
+  type = string
 }
 variable "vmnrds-vpc_cidr" {
-    type = string
+  type = string
 }
 variable "vmnrds-sn-names" {
   type = object({
-    snames = list(string)
-    srange = list(number)
+    snames  = list(string)
+    srange  = list(number)
     secname = list(string)
   })
 }
@@ -22,7 +22,7 @@ variable "vmnrds-pub-rt" {
 }
 variable "vmnrds" {
   type = object({
-    values = list(string)
+    values  = list(string)
     storage = number
   })
 }
@@ -39,5 +39,5 @@ variable "vmnrds-cred" {
   type = object({
     user = string
     pass = string
-  })  
+  })
 }
