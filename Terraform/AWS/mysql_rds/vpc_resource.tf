@@ -33,7 +33,7 @@ resource "aws_route_table" "vmnrds-pub-rt" {
 }
 resource "aws_route_table_association" "vmnrds-rt-assc" {
   subnet_id = aws_subnet.vmnrds-sn[0].id
-  route_table_id = aws_route_table.vmnrds-pub-rt
+  route_table_id = aws_route_table.vmnrds-pub-rt.id
 }
 resource "aws_security_group" "vmnrds-sg-local" {
   vpc_id = aws_vpc.vmnrds-vpc.id

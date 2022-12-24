@@ -24,6 +24,9 @@ data aws_subnet "vmn-data-sn" {
     name = "tag:Name"
     values = [var.vmnrds-sn-names.snames[0]]
   }
+  depends_on = [
+    aws_subnet.vmnrds-sn
+  ]
 }
 data "aws_security_groups" "vmn-data-sec" {
   filter {
