@@ -5,9 +5,10 @@ resource "aws_vpc" "vmnrds-vpc" {
   }
 }
 resource "aws_subnet" "vmnrds-sn" {
-  count      = length(var.vmnrds-sn-names.snames)
-  vpc_id     = aws_vpc.vmnrds-vpc.id
-  cidr_block = cidrsubnet(var.vmnrds-vpc_cidr, 8, var.vmnrds-sn-names.srange[count.index])
+  count             = length(var.vmnrds-sn-names.snames)
+  vpc_id            = aws_vpc.vmnrds-vpc.id
+  cidr_block        = cidrsubnet(var.vmnrds-vpc_cidr, 8, var.vmnrds-sn-names.srange[count.index])
+  availability_zone = var.vmnrds-sn-names.sazs[count.index]
   tags = {
     "Name" = var.vmnrds-sn-names.snames[count.index]
   }
@@ -52,7 +53,7 @@ resource "aws_security_group" "vmnrds-sg-local" {
     cidr_blocks = [var.vmnrds-pub-cidr]
   }
   tags = {
-    "Name" = var.vmnrds-sn-names.secname[0]
+    "Name" = var.vmnrds-sn-names.secname[1]
   }
 }
 resource "aws_security_group" "vmnrds-sg-public" {
@@ -72,6 +73,13 @@ resource "aws_security_group" "vmnrds-sg-public" {
     cidr_blocks = [var.vmnrds-pub-cidr]
   }
   tags = {
-    "Name" = var.vmnrds-sn-names.secname[1]
+    "Name" = var.vmnrds-sn-names.secname[0]
+  }
+}
+resource "aws_db_subnet_group" "vmnrds-db-sn-grp" {
+  //subnet_ids = ["${aws_subnet.vmnrds-sn.*.id}"]
+  subnet_ids = aws_subnet.vmnrds-sn.*.id
+  tags = {
+    "Name" = "var.vmnrds-db-sn-grp"
   }
 }

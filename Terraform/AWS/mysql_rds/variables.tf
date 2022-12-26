@@ -9,6 +9,7 @@ variable "vmnrds-sn-names" {
     snames  = list(string)
     srange  = list(number)
     secname = list(string)
+    sazs    = list(string)
   })
 }
 variable "vmnrds-igw-name" {
@@ -40,4 +41,7 @@ variable "vmnrds-cred" {
     user = string
     pass = string
   })
+}
+variable "vmnrds-db-sn-grp" {
+  type = string
 }

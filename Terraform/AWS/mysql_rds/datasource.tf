@@ -28,9 +28,10 @@ data "aws_subnet" "vmn-data-sn" {
     aws_subnet.vmnrds-sn
   ]
 }
-data "aws_security_groups" "vmn-data-sec" {
-  filter {
-    name   = "tag:Name"
-    values = [var.vmnrds-sn-names.secname[1]]
-  }
-}
+/*data "aws_security_group" "vmn-data-sec" {
+  id = aws_security_group.vmnrds-sg-local
+  //filter {
+  //  name   = "tag:Name"
+  //  values = [var.vmnrds-sn-names.secname[1]]
+  //}
+}*/
